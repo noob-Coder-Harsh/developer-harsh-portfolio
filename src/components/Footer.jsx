@@ -13,7 +13,7 @@ const Footer = () => {
           e.clientY - rect.top
         }px, rgba(0, 255, 255, 0.2), transparent 80%)`;
       }}
-      className="relative bg-gray-900 text-gray-400"
+      className="relative bg-background text-gray-400"
     >
       <div
         id="footer-glow"

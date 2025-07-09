@@ -1,48 +1,38 @@
 import React from 'react';
 import ProjectCard from '../ProjectCard';
-import heroImage from '../../assets/images/hero.jpg';
+import projectData from '../../data/projects-data';
+import { Link } from 'react-router-dom';
+import ProjectCardMobile from '../ProjetCardMobile';
 
 const Projects = () => {
-  const projects = [
-    {
-      title: 'Disney+ Clone',
-      techStack: 'React, Tailwind',
-      image: heroImage,
-      description: 'A Disney+ homepage clone built with React.',
-      link: 'https://your-disney-clone-link.com',
-    },
-    {
-      title: 'Ecommerce App',
-      techStack: 'Flutter, Firebase',
-      image: heroImage,
-      description: 'Ecommerce app for web, Android, and iOS.',
-      link: 'https://e-com-51fe4.web.app/',
-    },
-    // add more projects...
-  ];
+  const featuredProjects = projectData.filter((project) => project.featured);
 
   return (
     <section
       id="projects"
-      className="py-20 bg-gradient-to-b from-[#0f172a] via-[#1e293b] to-[#334155]"
+      className="w-full py-20 bg-gradient-to-b from-primary/20 via-background/90 to-background/50 flex flex-col items-center"
     >
-      <h2 className="text-4xl text-center font-bold text-cyan-300 mb-16 glow-text">
+      <h2 className="text-4xl text-center font-bold text-primary mb-16">
         My Projects
       </h2>
       
-      <div className="flex flex-col gap-12 px-4 max-w-6xl mx-auto">
-        {projects.map((proj, index) => (
-          <ProjectCard
-            key={index}
-            title={proj.title}
-            techStack={proj.techStack}
-            image={proj.image}
-            description={proj.description}
-            link={proj.link}
-            reverse={index % 2 !== 0}
-          />
-        ))}
+      <div className="flex flex-col gap-12 px-4 w-7xl mx-auto">
+        {featuredProjects.map((project, index) => (
+            <div key={project.id}>
+              {/* Mobile View */}
+              <div className="block md:hidden">
+                <ProjectCardMobile project={project} />
+              </div>
+
+              {/* Desktop View */}
+              <div className="hidden md:block">
+                <ProjectCard project={project} reverse={index % 2 !== 0} />
+              </div>
+            </div>
+          ))}
       </div>
+
+      <Link to="/projects" className="inline-block bg-primary hover:bg-popover text-primary-foreground px-4 py-2 rounded-full font-semibold transition duration-300">View All Projects</Link>
     </section>
   );
 };

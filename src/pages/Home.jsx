@@ -12,7 +12,6 @@ const Home = () => {
       <TechStack />
       <Project />
       <ContactCTA />
-      <Footer />
     </div>
   )
 }

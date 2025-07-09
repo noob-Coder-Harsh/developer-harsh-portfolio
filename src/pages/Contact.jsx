@@ -3,12 +3,12 @@ import heroImage from '../assets/images/hero.jpg'; // replace with your image pa
 
 const Contact = () => {
   return (
-    <div className="w-full min-h-screen bg-gradient-to-br from-[#0f2027] via-[#203a43] to-[#2c5364] flex justify-center items-center px-4 py-12">
-      <div className="max-w-6xl w-full grid grid-cols-1 md:grid-cols-2 gap-8 bg-white/10 backdrop-blur-md rounded-xl p-8 shadow-2xl">
+    <div className="w-full min-h-screen bg-gradient-to-b from-background via-background/50 to-primary/20 text-foreground flex justify-center items-center px-4 py-12">
+      <div className="max-w-6xl w-full grid grid-cols-1 md:grid-cols-2 gap-8 bg-primary/10 backdrop-blur-2xl rounded-xl p-8 shadow-2xl">
         
         {/* LEFT - Form */}
         <div className="flex flex-col justify-center">
-          <h2 className="text-4xl font-bold text-white mb-6">
+          <h2 className="text-4xl font-bold text-foreground mb-6">
             Let’s Connect
           </h2>
           <form className="space-y-6">
@@ -16,7 +16,7 @@ const Contact = () => {
               <input
                 type="text"
                 placeholder="Your Name"
-                className="w-full bg-white/10 text-white px-4 py-3 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-400 transition duration-300 placeholder-white/70
+                className="w-full bg-foreground/10 text-foreground px-4 py-3 rounded-md focus:outline-none focus:ring-2 focus:ring-secondary transition duration-300 placeholder-white/70
                            hover:animate-pulse"
               />
             </div>
@@ -24,7 +24,7 @@ const Contact = () => {
               <input
                 type="email"
                 placeholder="Your Email"
-                className="w-full bg-white/10 text-white px-4 py-3 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-400 transition duration-300 placeholder-white/70
+                className="w-full bg-foreground/10 text-white px-4 py-3 rounded-md focus:outline-none focus:ring-2 focus:ring-secondary transition duration-300 placeholder-white/70
                           hover:animate-pulse"
               />
             </div>
@@ -32,13 +32,13 @@ const Contact = () => {
               <textarea
                 rows="4"
                 placeholder="Your Message"
-                className="w-full bg-white/10 text-white px-4 py-3 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-400 transition duration-300 placeholder-white/70
+                className="w-full bg-foreground/10 text-white px-4 py-3 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-400 transition duration-300 placeholder-white/70
                            hover:animate-pulse resize-none"
               ></textarea>
             </div>
             <button
               type="submit"
-              className="w-full py-3 rounded-md bg-cyan-500 text-white font-semibold hover:bg-cyan-400 transition duration-300
+              className="w-full py-3 rounded-md bg-accent text-foreground font-semibold hover:bg-secondary transition duration-300
                         hover:animate-pulse]"
             >
               Send Message
