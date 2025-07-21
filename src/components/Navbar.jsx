@@ -1,58 +1,128 @@
-import React, { useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { Menu, X } from "lucide-react"; // Optional: icons
 
 const Navbar = () => {
   const location = useLocation();
-  const isHome = location.pathname === '/';
+  const isHome = location.pathname === "/";
+  const [menuOpen, setMenuOpen] = useState(false);
 
-  function ThemeToggleButton() {
+  // 🌙 Theme handling
   useEffect(() => {
-    if (localStorage.theme === 'dark') {
-      document.documentElement.classList.add('dark');
+    if (localStorage.theme === "dark") {
+      document.documentElement.classList.add("dark");
     }
   }, []);
-}
 
   const toggleTheme = () => {
-    const isDark = document.documentElement.classList.toggle('dark');
-    localStorage.theme = isDark ? 'dark' : 'light';
+    const isDark = document.documentElement.classList.toggle("dark");
+    localStorage.theme = isDark ? "dark" : "light";
   };
 
+  // 🧭 Smooth scroll
+  const handleSmoothScroll = (e, sectionId) => {
+    e.preventDefault();
+    setMenuOpen(false); // close on mobile
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  const commonLinkClass = "hover:text-primary transition";
+
+  const renderLinks = () => (
+    <>
+      <NavLink
+        to="/"
+        className={({ isActive }) =>
+          isActive ? "underline text-primary" : commonLinkClass
+        }
+        onClick={() => setMenuOpen(false)}
+      >
+        Home
+      </NavLink>
+
+      {isHome ? (
+        <a
+          href="#projects"
+          onClick={(e) => handleSmoothScroll(e, "projects")}
+          className={commonLinkClass}
+        >
+          Projects
+        </a>
+      ) : (
+        <NavLink
+          to="/projects"
+          className={({ isActive }) =>
+            isActive ? "underline text-primary" : commonLinkClass
+          }
+          onClick={() => setMenuOpen(false)}
+        >
+          Projects
+        </NavLink>
+      )}
+
+      <NavLink
+        to="/about"
+        className={({ isActive }) =>
+          isActive ? "underline text-primary" : commonLinkClass
+        }
+        onClick={() => setMenuOpen(false)}
+      >
+        About
+      </NavLink>
+
+      {isHome ? (
+        <a
+          href="#contact"
+          onClick={(e) => handleSmoothScroll(e, "contact")}
+          className={commonLinkClass}
+        >
+          Contact
+        </a>
+      ) : (
+        <NavLink
+          to="/contact"
+          className={({ isActive }) =>
+            isActive ? "underline text-primary" : commonLinkClass
+          }
+          onClick={() => setMenuOpen(false)}
+        >
+          Contact
+        </NavLink>
+      )}
+    </>
+  );
+
   return (
-    <nav className="fixed top-0 w-full bg-opacity-80 backdrop-blur-md z-50 shadow-md hover:glow-text">
-      <div className="w-full p-6 flex justify-between items-center text-foreground">
-        <div className="text-xl font-bold">
-          <Link to="/">Harsh.dev</Link>
-        </div>
-        <ul className="hidden md:flex space-x-6 font-medium">
-          <li>
-            <Link to="/" className="hover:text-primary">Home</Link>
-          </li>
-          <li>
-            {isHome ? (
-              <a href="#projects" className="hover:text-primary">Projects</a>
-            ) : (
-              <Link to="/projects" className="hover:text-primary">Projects</Link>
-            )}
-          </li>
-          <li>
-            <Link to="/about" className="hover:text-primary">About</Link>
-          </li>
-          <li>
-            {isHome ? (
-              <a href='#contact' className='hover:text-primary'>Contact</a>
-            ) :(
-              <Link to="/contact" className="hover:text-primary">Contact</Link>
-            )}
-            
-          </li>
-        </ul>
-        <div>
-          <button onClick={toggleTheme} className="px-3 py-1 rounded bg-primary text-primary-foreground">
-      Toggle Theme
-    </button>
+    <nav className="fixed top-0 left-0 w-full z-50 bg-opacity-80 backdrop-blur-md shadow-md text-foreground">
+      <div className="flex items-center justify-between px-6 py-4">
+        <NavLink to="/" className="text-xl font-bold">
+          Harsh.dev
+        </NavLink>
+
+        {/* Desktop Nav */}
+        <ul className="hidden md:flex gap-6 font-medium">{renderLinks()}</ul>
+
+        <div className="flex items-center gap-4">
+
+          {/* Hamburger on small screens */}
+          <button
+            className="md:hidden focus:outline-none"
+            onClick={() => setMenuOpen((prev) => !prev)}
+          >
+            {menuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
         </div>
       </div>
+
+      {/* Mobile Menu */}
+      {menuOpen && (
+        <div className="md:hidden flex flex-col gap-4 px-6 pb-4 animate-fade-in-down">
+          {renderLinks()}
+        </div>
+      )}
     </nav>
   );
 };

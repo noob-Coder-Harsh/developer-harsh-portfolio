@@ -75,7 +75,7 @@
 }
 
 .glow-text {
-  color: #67e8f9; /* soft cyan from Tailwind's cyan-300 */
+  color: var(--primary); /* soft cyan from Tailwind's cyan-300 */
   text-shadow:
     0 0 6px rgba(103, 232, 249, 0.4), 
     0 0 12px rgba(103, 232, 249, 0.2);
@@ -120,16 +120,16 @@
 }
 
 .dark {
-  --primary: oklch(0.5 0.25 282);   /* vibrant purple */
+  --primary: oklch(0.65 0.22 260);        /* vibrant bluish-purple */
   --primary-foreground: oklch(0.95 0.02 282); /* white/light text */
 
-  --accent: oklch(0.6 0.25 240);    /* rich blue */
+  --accent: oklch(0.7 0.2 250);           /* slightly cooler blue */
   --accent-foreground: oklch(0.98 0.02 240); /* white/light text */
 
-  --secondary: oklch(0.4 0.2 270);  /* bluish-purple mix */
+  --secondary: oklch(0.4 0.05 260);       /* muted violet-gray */
   --secondary-foreground: oklch(0.98 0.02 270);
 
-  --background: oklch(0.16 0.02 260);
+  --background: oklch(0.1 0.01 260);      /* nearly black with blue tint */
   --foreground: oklch(0.98 0.01 260);
 
   --card: oklch(0.22 0.02 260);
