@@ -12,7 +12,7 @@ const formatDate = (dateStr) => {
 
 const ProjectCardMobile = ({ project }) => {
   return (
-    <div className="relative">
+    <div className="relative w-full h-full">
       {/* Shiny Border */}
       {project.featured && (
         <div className="absolute inset-0 rounded-xl pointer-events-none z-10 overflow-hidden">
@@ -21,19 +21,21 @@ const ProjectCardMobile = ({ project }) => {
       )}
 
       {/* Main Glass Card */}
-      <div className="relative z-20 bg-gray-900/20 rounded-xl shadow-2xl overflow-hidden backdrop-blur-lg border border-white/10">
+      <div className="relative z-20 bg-gray-900/20 rounded-xl shadow-2xl overflow-hidden backdrop-blur-lg border border-white/10 flex flex-col h-full">
         <img
           src={project.image}
           alt={project.title}
           className="w-full h-48 object-cover"
         />
 
-        <div className="p-5 text-white">
+        <div className="p-5 text-white flex flex-col flex-grow">
           <h2 className="text-xl font-semibold text-cyan-400 mb-2">
             {project.title}
           </h2>
 
-          <p className="text-sm text-gray-300 mb-4">{project.description}</p>
+          <p className="text-sm text-gray-300 mb-4 flex-grow">
+            {project.description}
+          </p>
 
           <div className="flex flex-wrap gap-3 mb-4">
             {project.technologies.map((tech, i) => {
@@ -82,5 +84,6 @@ const ProjectCardMobile = ({ project }) => {
     </div>
   );
 };
+
 
 export default ProjectCardMobile;

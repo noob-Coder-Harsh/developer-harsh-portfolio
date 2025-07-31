@@ -1,28 +1,44 @@
 import React, { useEffect, useState } from "react";
-import { NavLink, useLocation, useNavigate } from "react-router-dom";
-import { Menu, X } from "lucide-react"; // Optional: icons
+import { NavLink, useLocation } from "react-router-dom";
+import { Menu, X, Sun, Moon } from "lucide-react";
 
 const Navbar = () => {
   const location = useLocation();
   const isHome = location.pathname === "/";
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
-  // 🌙 Theme handling
+  // 🌙 Theme setup
   useEffect(() => {
-    if (localStorage.theme === "dark") {
+    const userTheme = localStorage.theme || "light";
+    if (userTheme === "dark") {
       document.documentElement.classList.add("dark");
+      setIsDarkMode(true);
     }
   }, []);
 
   const toggleTheme = () => {
-    const isDark = document.documentElement.classList.toggle("dark");
-    localStorage.theme = isDark ? "dark" : "light";
+    const newMode = !isDarkMode;
+    setIsDarkMode(newMode);
+    if (newMode) {
+      document.documentElement.classList.add("dark");
+      localStorage.theme = "dark";
+    } else {
+      document.documentElement.classList.remove("dark");
+      localStorage.theme = "light";
+    }
   };
 
-  // 🧭 Smooth scroll
+  // ⬆️ Scroll to top
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    setMenuOpen(false);
+  };
+
+  // ⬇️ Smooth scroll to section
   const handleSmoothScroll = (e, sectionId) => {
     e.preventDefault();
-    setMenuOpen(false); // close on mobile
+    setMenuOpen(false);
     const section = document.getElementById(sectionId);
     if (section) {
       section.scrollIntoView({ behavior: "smooth" });
@@ -96,18 +112,26 @@ const Navbar = () => {
   );
 
   return (
-    <nav className="fixed top-0 left-0 w-full z-50 bg-opacity-80 backdrop-blur-md shadow-md text-foreground">
+    <nav className="fixed top-0 left-0 w-full z-50 bg-opacity-80 bg-white/5 backdrop-blur-md shadow-md text-foreground">
       <div className="flex items-center justify-between px-6 py-4">
-        <NavLink to="/" className="text-xl font-bold">
+        <button
+          onClick={scrollToTop}
+          className="text-xl font-bold hover:text-primary transition"
+        >
           Harsh.dev
-        </NavLink>
+        </button>
 
         {/* Desktop Nav */}
         <ul className="hidden md:flex gap-6 font-medium">{renderLinks()}</ul>
 
+        {/* Right-side actions */}
         <div className="flex items-center gap-4">
+          {/* Theme toggle */}
+          {/* <button onClick={toggleTheme} className="hover:text-primary transition">
+            {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
+          </button> */}
 
-          {/* Hamburger on small screens */}
+          {/* Hamburger Menu */}
           <button
             className="md:hidden focus:outline-none"
             onClick={() => setMenuOpen((prev) => !prev)}

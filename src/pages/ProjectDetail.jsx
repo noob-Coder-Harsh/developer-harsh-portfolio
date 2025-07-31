@@ -49,19 +49,29 @@ const ProjectDetail = () => {
 
       {/* Image Carousel */}
       <Carousel
-        showThumbs={false}
-        infiniteLoop
-        useKeyboardArrows
-        autoPlay
-        interval={5000}
-        className="rounded-xl overflow-hidden shadow-lg mb-8"
-      >
-        {[project.image, ...(project.extraImages || [])].map((img, i) => (
-          <div key={i}>
-            <img src={img} alt={`Slide ${i + 1}`} className="object-cover max-h-[500px] w-full" />
-          </div>
-        ))}
-      </Carousel>
+  showThumbs={false}
+  infiniteLoop
+  useKeyboardArrows
+  autoPlay
+  interval={5000}
+  swipeable={true}
+  emulateTouch={true}
+  showStatus={false}
+  showIndicators={true}
+  dynamicHeight={false}
+  className="rounded-xl overflow-hidden shadow-lg mb-8"
+>
+  {[project.image, ...(project.extraImages || [])].map((img, i) => (
+    <div key={i}>
+      <img
+        src={img}
+        alt={`Slide ${i + 1}`}
+        className="object-cover max-h-[500px] w-full select-none"
+      />
+    </div>
+  ))}
+</Carousel>
+
 
       {/* Description */}
       <p className="text-lg text-secondary-foreground mb-6">{project.description}</p>

@@ -28,7 +28,7 @@ const ContactCTA = () => {
             Available for freelance and collaboration. Ping me below 👇
           </p>
           <a
-            href="mailto:yourmail@example.com"
+            href="mailto:harsh.kushwaha664@example.com"
             className="inline-block px-6 py-3 bg-secondary hover:bg-accent
                        text-foreground rounded-full font-medium transition duration-300"
           >

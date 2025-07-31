@@ -1,7 +1,6 @@
 import React from "react";
 import projects from "../data/projects-data";
-import ProjectCard from "../components/ProjectCard"; // for web
-import ProjectCardMobile from "../components/ProjetCardMobile"; // for mobile
+import ProjectCardMobile from "../components/ProjetCardMobile"; // Unified card UI
 
 const Projects = () => {
   return (
@@ -11,18 +10,10 @@ const Projects = () => {
           Projects
         </h1>
 
-        <div className="flex flex-col gap-16">
-          {projects.map((project, index) => (
-            <div key={project.id}>
-              {/* Mobile View */}
-              <div className="block md:hidden">
-                <ProjectCardMobile project={project} />
-              </div>
-
-              {/* Desktop View */}
-              <div className="hidden md:block">
-                <ProjectCard project={project} reverse={index % 2 !== 0} />
-              </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {projects.map((project) => (
+            <div key={project.id} className="flex">
+              <ProjectCardMobile project={project} />
             </div>
           ))}
         </div>
